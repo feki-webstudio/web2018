@@ -3,25 +3,30 @@
 namespace App\Http\Controllers;
 
 use App\BlogPost;
+use DB;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
     public function index()
     {
-        $posts = BlogPost::get();
-
+        $posts = BlogPost
+            ::latest()
+            ->published()
+            ->paginate(10);
+     
         return view('blogpost_list', ['posts' => $posts]);
     }
 
     public function create()
     {
-        return view ('blogpost', ['post' => new BlogPost()]);
+        return view ('blogpost', ['post' => new BlogPost(['is_published' => true])]);
     }
 
     public function store(Request $request)
     {
         $post = new BlogPost($request->all());
+
         $post->save();
 
         return redirect('/blog');
@@ -42,4 +47,10 @@ class BlogController extends Controller
         return redirect('/blog');
     }
 
+    public function delete($id)
+    {
+        BlogPost::destroy($id);
+        
+        return redirect('/blog');
+    }
 }
