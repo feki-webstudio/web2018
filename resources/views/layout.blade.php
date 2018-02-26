@@ -5,8 +5,10 @@
     @section('meta')
         <meta name="description" content="Ez egy rövid leiras">
     @show
+
+    {{--<link rel="stylesheet" href="{{asset('css/app.css')}}">--}}
 </head>
 <body>
-    @yield('content')
+@yield('content')
 </body>
 </html>
