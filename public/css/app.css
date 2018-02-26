@@ -1,4 +1,9 @@
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);/*!
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);nav.navbar {
+  margin-bottom: 50px;
+  background: #cbcbcb;
+}
+
+/*!
  * Bootstrap v4.0.0 (https://getbootstrap.com)
  * Copyright 2011-2018 The Bootstrap Authors
  * Copyright 2011-2018 Twitter, Inc.
@@ -9992,11 +9997,5 @@ a.text-dark:focus {
   .table-bordered td {
     border: 1px solid #ddd !important;
   }
-}
-
-.navbar-laravel {
-  background-color: #fff;
-  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 

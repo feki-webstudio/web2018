@@ -1,25 +1,40 @@
 @extends('layout')
 
 @section('content')
-    <div>
-    <a href="{{ route('blog.create') }}">Új poszt</a>
+    <div class="container">
+
+        <div>
+            <a class="btn btn-primary" href="{{ route('blog.create') }}">Új poszt</a>
+        </div>
+
+        <br>
+        <div class="row">
+            @foreach($posts as $post)
+                <div class="col-4">
+                    {{--@include('blogpost_content', ['post' => $post])--}}
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{$post->title}}</h5>
+                            <span>{{ $post->created_at->format('Y. m. d. H:i') }}</span>
+                            <p class="card-text">{{$post->intro}}</p>
+                            <a class="btn btn-primary w-100 mb-3" href="{{ route('blog.edit', ['id' => $post->id]) }}">
+                                Szerkesztés
+                            </a>
+                            <form
+                                action="{{ route('blog.delete', ['id' => $post->id]) }}"
+                                method="POST"
+                            >
+                                {{ method_field('delete') }}
+                                {{ csrf_field() }}
+                                <button class="btn btn-primary w-100" type="submit">Poszt törlése</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+        {{ $posts->links() }}
+
     </div>
-    
-    <br>
-
-    @foreach($posts as $post)
-        @include('blogpost_content', ['post' => $post])
-        <a href="{{ route('blog.edit', ['id' => $post->id]) }}">Szerkesztés</a>
-
-        <form action="{{ route('blog.delete', ['id' => $post->id]) }}"
-                method="POST"
-        >
-        {{ method_field('delete') }}
-        {{ csrf_field() }}
-            <button type="submit">Poszt törlése</button>
-        </form>
-        <hr>
-    @endforeach
-
-    {{ $posts->links() }}
 @endsection
