@@ -17,6 +17,7 @@
                         <h5 class="card-title">{{$post->title}}</h5>
                         <span>{{ $post->created_at->format('Y. m. d. H:i') }}</span>
                         <p class="card-text">{{$post->intro}}</p>
+                        <div class="card-text">{{$post->content}}</div>
                         <a class="btn btn-primary w-100 mb-3" href="{{ route('blog.edit', ['id' => $post->id]) }}">
                             Szerkesztés
                         </a>
