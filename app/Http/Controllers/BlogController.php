@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\BlogPost;
 use DB;
 use Illuminate\Http\Request;
+use Illuminate\Validation;
 
 class BlogController extends Controller
 {
@@ -14,7 +15,7 @@ class BlogController extends Controller
             ::latest()
             ->published()
             ->paginate(10);
-     
+
         return view('blogpost_list', ['posts' => $posts]);
     }
 
@@ -25,11 +26,16 @@ class BlogController extends Controller
 
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'title' => 'required|unique:blog_posts|max:255',
+            'intro' => 'required',
+        ]);
+
         $post = new BlogPost($request->all());
 
         $post->save();
 
-        return redirect('/blog');
+        return redirect('/');
     }
 
     public function edit($id)
@@ -50,7 +56,7 @@ class BlogController extends Controller
     public function delete($id)
     {
         BlogPost::destroy($id);
-        
+
         return redirect('/blog');
     }
 }

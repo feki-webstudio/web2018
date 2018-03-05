@@ -12,7 +12,7 @@
             <div class="col-lg-4">
                 {{--@include('blogpost_content', ['post' => $post])--}}
 
-                <div class="card">
+                <div class="card mb-5">
                     <div class="card-body">
                         <h5 class="card-title">{{$post->title}}</h5>
                         <span>{{ $post->created_at->format('Y. m. d. H:i') }}</span>
