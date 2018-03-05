@@ -10,7 +10,7 @@
         <br>
         <div class="row">
             @foreach($posts as $post)
-                <div class="col-4">
+                <div class="col-lg-4">
                     {{--@include('blogpost_content', ['post' => $post])--}}
 
                     <div class="card">
