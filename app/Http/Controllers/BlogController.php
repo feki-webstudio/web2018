@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\BlogPost;
+use App\Comment;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Validation;
@@ -58,5 +59,17 @@ class BlogController extends Controller
         BlogPost::destroy($id);
 
         return redirect('/blog');
+    }
+
+    public function storeComment(Request $request){
+        $validatedData = $request->validate([
+            'content' => 'required',
+        ]);
+
+        $comment = new Comment($request->all());
+
+        $comment->save();
+
+        return redirect('/');
     }
 }

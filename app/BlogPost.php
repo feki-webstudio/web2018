@@ -10,6 +10,14 @@ class BlogPost extends Model
 
     protected $table = 'blog_posts';
 
+    /**
+     * Get the comments for the blog post.
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     public function scopePublished($query)
     {
         $query->where('is_published', true);
