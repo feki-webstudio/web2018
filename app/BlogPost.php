@@ -10,6 +10,23 @@ class BlogPost extends Model
 
     protected $table = 'blog_posts';
 
+    protected $visible = [
+        'id',
+        'title',
+        'content',
+        'intro',
+        'is_published',
+        'created_at',
+        'saved_comments'
+    ];
+
+    protected $appends = ['saved_comments'];
+
+    public function getSavedCommentsAttribute()
+    {
+        return $this->comments;
+    }
+
     /**
      * Get the comments for the blog post.
      */

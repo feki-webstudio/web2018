@@ -61,7 +61,8 @@ class BlogController extends Controller
         return redirect('/blog');
     }
 
-    public function storeComment(Request $request){
+    public function storeComment(Request $request)
+    {
         $validatedData = $request->validate([
             'content' => 'required',
         ]);

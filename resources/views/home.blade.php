@@ -33,7 +33,8 @@
                                 </ul>
                             </div>
 
-                            <form action="/comment" method="POST">
+                            <form action="/comment" method="POST"
+                                  class="comment-form">
 
                                 {{ csrf_field() }}
                                 <input type="hidden" name="blog_post_id"
@@ -72,3 +73,25 @@
         {{ $posts->links() }}
     </div>
 @endsection
+
+@section('extra-scripts')
+    <script>
+        $('.comment-form').submit(function () {
+            var form = $(this);
+
+            $.ajax({
+                url: '/api/comments',
+                type: 'POST',
+                data: form.serialize(),
+                success: function (response) {
+                    form.parent().find('.comments ul').append('<li>' + response.content + '</li>');
+                    form.find('textarea').val("");
+                }
+            });
+
+
+            return false;
+        });
+
+    </script>
+@append
